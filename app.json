@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "Travel Packing List",
+    "slug": "travel-packing-list",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.aleix.travelpackinglist",
+      "infoPlist": {
+        "NSCalendarsUsageDescription": "This app needs access to your calendar to sync packing lists with Reminders.",
+        "NSRemindersUsageDescription": "This app needs access to your reminders to create packing list reminders."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      }
+    }
+  }
+}

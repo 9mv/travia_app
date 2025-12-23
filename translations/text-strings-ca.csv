@@ -1,0 +1,270 @@
+textId,text
+app.title,Llista de viatges
+app.name,Llista de viatges
+
+# Trip Configuration Screen
+config.screen.title,Planificació de viatge
+config.screen.subtitle,Configuració de llista de viatge
+config.days.label,Dies
+config.days.placeholder,Nombre de dies de viatge
+config.home.label,Viatge a casa o segona residència?
+config.home.helper,Els articles ja disponibles a casa s'exclouran
+config.ai.label,Utilitzar personalització amb AI
+config.ai.helper,Obtenir suggeriments intel·ligents basats en la temporada i la destinació
+config.luggage.label,Equipatge gran
+config.luggage.helper,Activa si portes maleta gran (desactivat = només motxilla)
+config.season.label,Estació
+config.season.spring,Primavera
+config.season.summer,Estiu
+config.season.fall,Tardor
+config.season.winter,Hivern
+config.button.generate,Generar llista
+config.error.invalidDays,Per favor
+
+# Packing List Screen
+list.screen.title,Llista recomanada de viatge
+list.button.back,← Tornar
+list.summary.duration,Durada:
+list.summary.season,Estació:
+list.summary.destination,Destí:
+list.summary.totalItems,Total d'articles:
+list.destination.home,Casa
+list.destination.general,General
+list.ai.badge,✨ AI
+list.ai.tip,💡 Consell de IA:
+list.button.export,📋 Exportar a Recordatoris
+list.days.suffix,dies
+
+# Export to Reminders
+reminders.permission.title,Es necessita permís
+reminders.permission.message, Es necessita accés a la app de Recordatoris per exportar la llista. Dona permís.
+reminders.permission.cancel,Cancel·la
+reminders.permission.grant,Concedir permís
+reminders.permission.denied,Permís denegat
+reminders.permission.deniedMessage,No es pot exportar sense accés a Recordatoris.
+reminders.success.title,Fet!
+reminders.success.message,La teva llista de viatge s'ha exportat a l'aplicació Recordatoris amb {count} articles.
+reminders.error.title,Error
+reminders.error.message,No s'ha pogut exportar a Recordatoris. Per favor
+reminders.listName,Llistes de viatge
+reminders.listColor,#FF6B6B
+reminders.tripTitle.home,Fer la maleta per casa - {days} dies
+reminders.tripTitle.general,Fer la maleta per viatge - {days} dies
+reminders.tripNotes.generated,Generat:
+reminders.tripNotes.season,Estació:
+reminders.tripNotes.aiEnhanced,Millora amb IA:
+reminders.tripNotes.yes,Sí
+reminders.tripNotes.no,No
+reminders.itemTitle.withQuantity,{name} ({quantity}x)
+reminders.itemTitle.single,{name}
+reminders.itemNotes.category,Categoria:
+reminders.itemNotes.aiTip,Consell de IA:
+
+# AI Enhancement
+ai.error.title,Millora amb IA fallida
+ai.error.message,La llista bàsica d'articles ha estat generada però no s'han pogut afegir suggeriments d'IA. Per favor
+ai.error.apiKey,Clau API d'OpenRouter no configurada. Per favor
+ai.summary.title,Consells per al teu viatge
+ai.suggestedItems.title,Articles suggerits per la IA
+ai.suggestedItems.subtitle,Revisa aquests articles suggerits i decideix si vols afegir-los a la teva llista
+ai.suggestion.accept,✓ Afegir
+ai.suggestion.decline,✕ Rebutjar
+
+# Item Categories
+category.basics,Bàsics
+category.clothes,Roba
+category.toiletries,Higiene
+category.electronics,Tech
+category.documents,Documents
+category.accessories,Accessoris
+category.health,Salut
+category.misc,Misc
+category.pending,Pendent
+
+# Loading States
+loading.generating,Generant...
+loading.enhancing,Afegint suggeriments d'IA...
+loading.exporting,Exportant a Recordatoris...
+
+# General
+general.ok,OK
+general.cancel,Cancel·la
+general.error,Error
+general.success,Èxit
+general.loading,Carregant...
+
+# Settings Screen
+settings.title,Configuració
+settings.ai.section.title,Configuració d'Intel·ligència Artificial
+settings.ai.section.description,Configura la clau API d'OpenRouter per activar funcions intel·ligents com suggeriments personalitzats i consells de viatge.
+settings.apiKey.label,Clau API d'OpenRouter
+settings.apiKey.placeholder,sk-or-v1-...
+settings.apiKey.show,Mostra la clau API
+settings.apiKey.configured,Clau API configurada correctament
+settings.apiKey.empty,Per favor
+settings.apiKey.invalid,Clau API no vàlida. Ha de començar amb 'sk-or-v1-'
+settings.apiKey.saved,La clau API s'ha desat correctament.
+settings.apiKey.saveError,No s'ha pogut desar la clau API. Torna-ho a intentar.
+settings.apiKey.save,💾 Desar clau API
+settings.apiKey.delete,🗑️ Eliminar clau API
+settings.apiKey.deleted,La clau API s'ha eliminat correctament.
+settings.apiKey.delete.title,Confirma eliminació
+settings.apiKey.delete.message,Estàs segur que vols eliminar la clau API? Les funcions d'IA deixaran d'estar disponibles.
+settings.apiKey.delete.confirm,Eliminar
+settings.apiKey.info.title,Com obtenir una clau API
+settings.apiKey.info.text,Necessites una clau API d'OpenRouter per utilitzar les funcions d'IA. És gratuït per començar.
+settings.apiKey.info.get,Visita OpenRouter per crear el teu compte i obtenir una clau API:
+settings.security.title,Seguretat
+settings.security.info,La teva clau API s'emmagatzema de forma segura al dispositiu amb xifratge. Mai es comparteix ni s'envia enlloc excepte a OpenRouter.
+
+# Language Settings
+settings.language.section.title,Idioma
+settings.language.label,Idioma de l'Aplicació
+settings.language.ca,Català
+settings.language.en,English
+settings.language.es,Español
+settings.language.changed,Idioma canviat correctament. L'aplicació es recarregarà.
+
+# Custom Items Management
+settings.items.title,Articles personalitzats
+settings.items.description,Gestiona els articles de la teva llista de viatge. Afegeix, edita o elimina articles, i exporta/importa la teva configuració.
+settings.items.exportJson,📤 Exportar JSON
+settings.items.exportCsv,📤 Exportar CSV
+settings.items.restore,↺ Restaurar
+settings.items.add,+ Afegir article nou
+settings.items.restore.title,Restaurar valors per defecte
+settings.items.restore.message,Això restaurarà tots els articles a la seva configuració predeterminada. Estàs segur?
+settings.items.restore.success,Articles restaurats als valors per defecte
+settings.items.restore.error,Error al restaurar els valors per defecte
+settings.items.delete.title,Eliminar article
+settings.items.delete.message,Estàs segur que vols eliminar "{name}"?
+settings.items.delete.success,Article eliminat
+settings.items.delete.error,Error al eliminar l'article
+settings.items.save.success.add,Article afegit
+settings.items.save.success.edit,Article actualitzat
+settings.items.load.error,Error al carregar els articles personalitzats
+settings.items.export.error,Error al exportar la configuració
+
+# Item Editor Modal
+itemEditor.title.add,Afegir article nou
+itemEditor.title.edit,Editar article
+itemEditor.cancel,Cancel·lar
+itemEditor.save,Guardar
+itemEditor.saving,Guardant...
+itemEditor.id.label,ID
+itemEditor.id.placeholder,id_article_unic
+itemEditor.id.helper,Identificador únic (minúscules, usa guions baixos)
+itemEditor.name.label,Nom
+itemEditor.name.placeholder,Nom de l'article
+itemEditor.category.label,Categoria
+itemEditor.category.select,Seleccionar categoria
+itemEditor.quantityType.label,Tipus de quantitat
+itemEditor.quantityType.fixed,Fixa
+itemEditor.quantityType.perDay,Per dia
+itemEditor.quantity.label,Quantitat
+itemEditor.quantity.placeholder,1
+itemEditor.dailyFactor.label,Factor diari
+itemEditor.dailyFactor.placeholder,1.0
+itemEditor.dailyFactor.helper,p. ex., 1.25 = 1.25 articles per dia de viatge
+itemEditor.minDays.label,Dies mínims
+itemEditor.minDays.placeholder,0
+itemEditor.minDays.helper,Només incloure si el viatge és almenys aquesta quantitat de dies (0 = sempre incloure)
+itemEditor.bigLuggage.label,Requereix equipatge gran
+itemEditor.bigLuggage.helper,Només incloure quan l'usuari té equipatge gran
+itemEditor.seasons.label,Estacions (opcional)
+itemEditor.seasons.helper,Deixa buit per incloure en totes les estacions
+itemEditor.includeFor.label,Incloure per
+itemEditor.includeFor.general,Viatges generals
+itemEditor.includeFor.home,Anar a casa
+itemEditor.validation.nameRequired,El nom de l'article és obligatori
+itemEditor.validation.idRequired,L'ID de l'article és obligatori
+itemEditor.validation.quantityInvalid,La quantitat ha de ser almenys 1
+itemEditor.validation.dailyFactorInvalid,El factor diari ha de ser major que 0
+itemEditor.validation.minDaysInvalid,Els dies mínims han de ser 0 o més
+itemEditor.validation.destinationRequired,L'article ha d'incloure's per almenys un tipus de destinació
+itemEditor.validation.errorTitle,Error de validació
+itemEditor.error.title,Error
+
+# Item Names
+item.underwear,Roba interior
+item.socks,Mitjons
+item.tshirt,Samarretes
+item.shorts,Pantalons curts
+item.pants,Pantalons/texans
+item.sweater,Jersei
+item.jacket,Jaqueta
+item.swimsuit,Banyador
+item.pajamas,Pijama
+item.toothbrush,Raspall de dents
+item.dni,DNI
+item.wallet,Cartera
+item.iphone_wallet,Cartera iPhone
+item.keys,Claus
+item.car_keys,Claus del cotxe
+item.menorca_keys,Claus de Menorca
+item.phone,Telèfon
+item.airpods,AirPods
+item.apple_watch,Apple Watch
+item.bose_headphones,Auriculars Bose
+item.macbook,MacBook
+item.ipad,iPad
+item.apple_pencil,Apple Pencil
+item.macbook_accessories,Accessoris MacBook
+item.apple_watch_charger,Carregador Apple Watch
+item.macbook_charger,Carregador MacBook
+item.lightning_charger,Carregador Lightning
+item.switch,Switch
+item.usbc_cable,Cable USB-C
+item.work_pc,PC feina
+item.work_pc_charger,Carregador PC feina
+item.hdmi_adapter,Adaptador HDMI
+item.gillete_shaver,Maquineta Gillette
+item.contact_lenses,Lents de contacte
+item.perfume,Perfum
+item.toothbrush_kit,Kit raspall de dents
+item.deodorant,Desodorant
+item.styling_gel,Gel per cabell
+item.solar_cream,Crema solar
+item.bath_gel,Gel de dutxa
+item.shirt,Camisa
+item.tshirt,Samarreta
+item.sport_clothes,Roba d'esport
+item.underwear,Roba interior
+item.socks,Mitjons
+item.shoes,Sabates
+item.jacket,Jaqueta
+item.trousers,Pantalons
+item.shorts,Pantalons curts
+item.belt,Cinturó
+item.hoodie_jumper,Dessuadora
+item.suit,Vestit/americana
+item.swimming_suit,Banyador
+item.slippers,Xancletes
+item.gloves,Guants
+item.cap,Gorra
+item.pajama,Pijama
+item.sports_shoes,Sabates esportives
+item.beanie,Gorro de llana
+item.backpack,Motxilla
+item.solar_glasses,Ulleres de sol
+item.glasses,Ulleres
+item.ebook,Llibre electrònic
+item.board_games,Jocs de taula
+item.towel,Tovallola
+category.basics,Bàsics
+category.clothes,Roba
+category.toiletries,Higiene
+category.electronics,Electrònica
+category.documents,Documents
+category.accessories,Accessoris
+category.misc,Miscel·lània
+
+# Chat Assistant
+chat.title,Assistent d'equipatge
+chat.subtitle,Pregunta'm sobre la teva llista
+chat.welcome,Hola! Estic aquí per ajudar-te a optimitzar la teva llista d'equipatge. Pots preguntar-me sobre articles específics o demanar suggeriments.
+chat.input.placeholder,Pregunta'm sobre la llista...
+chat.loading,Pensant...
+chat.error.title,Error del xat
+chat.error.message,No s'ha pogut obtenir una resposta. Si us plau, torna-ho a intentar.
+chat.button,💬 Assistent

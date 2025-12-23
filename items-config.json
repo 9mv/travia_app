@@ -1,0 +1,566 @@
+{
+  "$schema": "items-config-schema.json",
+  "_comment": "═══════════════════════════════════════════════════════════════════════════════",
+  "_comment_guide": [
+    "PACKING LIST ITEMS CONFIGURATION",
+    "",
+    "This file defines all packing items and their behavior.",
+    "See docs/ITEMS_CONFIG.md for full documentation.",
+    "",
+    "═══════════════════════════════════════════════════════════════════════════════",
+    "",
+    "STRUCTURE:",
+    "  - defaults: Default values for all items (can be overridden per item)",
+    "  - categories: Display names for item categories",
+    "  - items: Array of packing items",
+    "",
+    "ITEM FIELDS:",
+    "",
+    "Required fields:",
+    "  • id (string)       - Unique identifier for translations (e.g., 'phone', 'underwear')",
+    "  • name (string)     - English display name (other languages in translations)",
+    "  • category (string) - One of: basics, clothes, toiletries, electronics, documents, accessories, misc",
+    "",
+    "Optional fields (use defaults if not specified):",
+    "  • quantityType      - How to calculate quantity:",
+    "                        'fixed'  = Use explicit quantity field (e.g., 1 passport)",
+    "                        'perDay' = Multiply dailyFactor × numberOfDays (e.g., 1.25 underwear/day)",
+    "                        Default: 'fixed'",
+    "",
+    "  • quantity (number) - For quantityType='fixed' only. Default: 1",
+    "",
+    "  • dailyFactor (number) - For quantityType='perDay' only. Examples:",
+    "                           1.25 = more than one per day (underwear with extras)",
+    "                           1.0  = one per day (t-shirts)",
+    "                           0.5  = one every 2 days (shirts)",
+    "                           0.25 = one every 4 days (shoes)",
+    "",
+    "  • seasons (array)   - When to include: ['spring','summer','fall','winter']",
+    "                        Default: all seasons",
+    "",
+    "  • includeFor (array) - Where to include: ['general','home'] or subset",
+    "                         'general' = regular trips, 'home' = second residence",
+    "                         Default: ['general','home']",
+    "",
+    "  • minDays (number)  - Minimum trip duration to include (0 = always include)",
+    "                        Examples: 0=essentials, 2=nice-to-have, 5=long trips only",
+    "                        Default: 0",
+    "",
+    "  • requiresBigLuggage (boolean) - Only include when user selects 'big luggage'",
+    "                                   (false = backpack-compatible)",
+    "                                   Default: false",
+    "",
+    "═══════════════════════════════════════════════════════════════════════════════",
+    "",
+    "EXAMPLES:",
+    "",
+    "Fixed quantity item (most items):",
+    "  {",
+    "    \"id\": \"passport\",",
+    "    \"name\": \"Passport\",",
+    "    \"category\": \"documents\"",
+    "    // Uses all defaults: quantityType='fixed', quantity=1, all seasons, etc.",
+    "  }",
+    "",
+    "Per-day item with custom settings:",
+    "  {",
+    "    \"id\": \"underwear\",",
+    "    \"name\": \"Underwear\",",
+    "    \"category\": \"clothes\",",
+    "    \"quantityType\": \"perDay\",",
+    "    \"dailyFactor\": 1.25",
+    "    // For 4-day trip: ceil(1.25 × 4) = 5 underwear",
+    "  }",
+    "",
+    "Summer-only item:",
+    "  {",
+    "    \"id\": \"sunscreen\",",
+    "    \"name\": \"Sunscreen\",",
+    "    \"category\": \"toiletries\",",
+    "    \"seasons\": [\"summer\"]",
+    "    // Only included for summer trips",
+    "  }",
+    "",
+    "Big luggage required:",
+    "  {",
+    "    \"id\": \"suit\",",
+    "    \"name\": \"Suit\",",
+    "    \"category\": \"clothes\",",
+    "    \"requiresBigLuggage\": true,",
+    "    \"minDays\": 3",
+    "    // Only for trips ≥3 days with big luggage",
+    "  }",
+    "",
+    "═══════════════════════════════════════════════════════════════════════════════"
+  ],
+  
+  "defaults": {
+    "_comment": "Default values applied to all items unless explicitly overridden",
+    "quantityType": "fixed",
+    "quantity": 1,
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "includeFor": [
+      "general",
+      "home"
+    ],
+    "minDays": 0,
+    "requiresBigLuggage": false
+  },
+  "categories": {
+    "basics": "Basics",
+    "clothes": "Clothes",
+    "toiletries": "Toiletries",
+    "electronics": "Electronics",
+    "documents": "Documents",
+    "accessories": "Accessories",
+    "misc": "Miscellaneous"
+  },
+  "items": [
+    {
+      "id": "dni",
+      "name": "DNI",
+      "category": "basics"
+    },
+    {
+      "id": "wallet",
+      "name": "Wallet",
+      "category": "basics"
+    },
+    {
+      "id": "iphone_wallet",
+      "name": "iPhone Wallet",
+      "category": "basics"
+    },
+    {
+      "id": "keys",
+      "name": "Keys",
+      "category": "basics"
+    },
+    {
+      "id": "car_keys",
+      "name": "Car Keys",
+      "category": "basics",
+      "minDays": 10
+    },
+    {
+      "id": "menorca_keys",
+      "name": "Menorca Keys",
+      "category": "basics",
+      "includeFor": [
+        "home"
+      ]
+    },
+    {
+      "id": "phone",
+      "name": "Phone",
+      "category": "basics"
+    },
+    {
+      "id": "airpods",
+      "name": "AirPods",
+      "category": "basics"
+    },
+    {
+      "id": "apple_watch",
+      "name": "Apple Watch",
+      "category": "basics"
+    },
+    {
+      "id": "bose_headphones",
+      "name": "Bose Headphones",
+      "category": "basics",
+      "minDays": 2
+    },
+    {
+      "id": "macbook",
+      "name": "MacBook",
+      "category": "electronics",
+      "includeFor": [
+        "general"
+      ],
+      "minDays": 3,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "ipad",
+      "name": "iPad",
+      "category": "electronics",
+      "minDays": 2
+    },
+    {
+      "id": "apple_pencil",
+      "name": "Apple Pencil",
+      "category": "electronics",
+      "minDays": 2
+    },
+    {
+      "id": "macbook_accessories",
+      "name": "MacBook Accessories",
+      "category": "electronics",
+      "minDays": 4
+    },
+    {
+      "id": "apple_watch_charger",
+      "name": "Apple Watch Charger",
+      "category": "electronics"
+    },
+    {
+      "id": "macbook_charger",
+      "name": "MacBook Charger",
+      "category": "electronics",
+      "minDays": 4
+    },
+    {
+      "id": "lightning_charger",
+      "name": "Lightning Charger",
+      "category": "electronics"
+    },
+    {
+      "id": "switch",
+      "name": "Switch",
+      "category": "electronics",
+      "includeFor": [
+        "home",
+        "general"
+      ]
+    },
+    {
+      "id": "usbc_cable",
+      "name": "USB-C Cable",
+      "category": "electronics"
+    },
+    {
+      "id": "work_pc",
+      "name": "Work PC",
+      "category": "electronics",
+      "minDays": 2,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "work_pc_charger",
+      "name": "Work PC Charger",
+      "category": "electronics",
+      "minDays": 2,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "hdmi_adapter",
+      "name": "HDMI Adapter",
+      "category": "electronics",
+      "includeFor": [
+        "general"
+      ],
+      "minDays": 3,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "gillete_shaver",
+      "name": "Gillette Shaver",
+      "category": "toiletries",
+      "minDays": 3,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "contact_lenses",
+      "name": "Contact Lenses",
+      "category": "toiletries"
+    },
+    {
+      "id": "perfume",
+      "name": "Perfume",
+      "category": "toiletries",
+      "minDays": 2,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "toothbrush_kit",
+      "name": "Toothbrush Kit",
+      "category": "toiletries"
+    },
+    {
+      "id": "deodorant",
+      "name": "Deodorant",
+      "category": "toiletries",
+      "minDays": 2
+    },
+    {
+      "id": "styling_gel",
+      "name": "Styling Gel",
+      "category": "toiletries",
+      "includeFor": [
+        "general"
+      ],
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "solar_cream",
+      "name": "Solar Cream",
+      "category": "toiletries",
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "includeFor": [
+        "general"
+      ],
+      "minDays": 1
+    },
+    {
+      "id": "bath_gel",
+      "name": "Bath Gel",
+      "category": "toiletries",
+      "includeFor": [
+        "general"
+      ],
+      "minDays": 1,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "shirt",
+      "name": "Shirt",
+      "category": "clothes",
+      "dailyFactor": 0.5,
+      "minDays": 3,
+      "requiresBigLuggage": true,
+      "quantityType": "perDay"
+    },
+    {
+      "id": "tshirt",
+      "name": "T-Shirt",
+      "category": "clothes",
+      "dailyFactor": 0.9,
+      "quantityType": "perDay"
+    },
+    {
+      "id": "sport_clothes",
+      "name": "Sport Clothes",
+      "category": "clothes",
+      "quantity": 2,
+      "minDays": 4,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "underwear",
+      "name": "Underwear",
+      "category": "clothes",
+      "dailyFactor": 1.25,
+      "quantityType": "perDay"
+    },
+    {
+      "id": "socks",
+      "name": "Socks",
+      "category": "clothes",
+      "dailyFactor": 1.01,
+      "quantityType": "perDay"
+    },
+    {
+      "id": "shoes",
+      "name": "Shoes",
+      "category": "clothes",
+      "dailyFactor": 0.25,
+      "quantityType": "perDay"
+    },
+    {
+      "id": "jacket",
+      "name": "Jacket",
+      "category": "clothes",
+      "seasons": [
+        "fall",
+        "winter",
+        "spring"
+      ]
+    },
+    {
+      "id": "summer_jacket",
+      "name": "Summer Jacket",
+      "category": "clothes",
+      "seasons": [
+        "summer"
+      ]
+    },
+    {
+      "id": "trousers",
+      "name": "Trousers",
+      "category": "clothes",
+      "dailyFactor": 0.33,
+      "seasons": [
+        "spring",
+        "fall",
+        "winter"
+      ],
+      "quantityType": "perDay"
+    },
+    {
+      "id": "summer_trousers",
+      "name": "Summer Trousers",
+      "category": "clothes",
+      "dailyFactor": 0.25,
+      "seasons": [
+        "summer"
+      ],
+      "quantityType": "perDay"
+    },
+    {
+      "id": "shorts",
+      "name": "Shorts",
+      "category": "clothes",
+      "dailyFactor": 0.5,
+      "seasons": [
+        "summer"
+      ],
+      "quantityType": "perDay"
+    },
+    {
+      "id": "belt",
+      "name": "Belt",
+      "category": "clothes",
+      "includeFor": [
+        "general"
+      ],
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "hoodie_jumper",
+      "name": "Hoodie or Jumper",
+      "category": "clothes",
+      "dailyFactor": 0.5,
+      "seasons": [
+        "fall",
+        "winter",
+        "spring",
+        "summer"
+      ],
+      "requiresBigLuggage": true,
+      "quantityType": "perDay"
+    },
+    {
+      "id": "suit",
+      "name": "Suit",
+      "category": "clothes",
+      "includeFor": [
+        "general"
+      ],
+      "minDays": 3,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "swimming_suit",
+      "name": "Swimming Suit",
+      "category": "clothes",
+      "dailyFactor": 0.25,
+      "seasons": [
+        "summer"
+      ],
+      "minDays": 1,
+      "quantityType": "perDay"
+    },
+    {
+      "id": "slippers",
+      "name": "Slippers",
+      "category": "clothes",
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "includeFor": [
+        "home"
+      ],
+      "minDays": 5,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "gloves",
+      "name": "Gloves",
+      "category": "clothes",
+      "seasons": [
+        "winter"
+      ]
+    },
+    {
+      "id": "cap",
+      "name": "Cap",
+      "category": "clothes",
+      "seasons": [
+        "summer"
+      ],
+      "minDays": 1
+    },
+    {
+      "id": "pajama",
+      "name": "Pajama",
+      "category": "clothes",
+      "quantity": 2,
+      "includeFor": [
+        "general"
+      ],
+      "minDays": 2,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "sports_shoes",
+      "name": "Sports Shoes",
+      "category": "clothes",
+      "minDays": 3,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "beanie",
+      "name": "Beanie",
+      "category": "clothes",
+      "seasons": [
+        "winter"
+      ],
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "backpack",
+      "name": "Backpack",
+      "category": "accessories"
+    },
+    {
+      "id": "solar_glasses",
+      "name": "Solar Glasses",
+      "category": "accessories"
+    },
+    {
+      "id": "glasses",
+      "name": "Glasses",
+      "category": "accessories"
+    },
+    {
+      "id": "ebook",
+      "name": "eBook",
+      "category": "misc",
+      "minDays": 3,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "board_games",
+      "name": "Board Games",
+      "category": "misc",
+      "includeFor": [
+        "home",
+        "general"
+      ],
+      "minDays": 7,
+      "requiresBigLuggage": true
+    },
+    {
+      "id": "towel",
+      "name": "Towel",
+      "category": "accessories",
+      "quantity": 2,
+      "includeFor": [
+        "general"
+      ],
+      "minDays": 1,
+      "requiresBigLuggage": true
+    }
+  ]
+}

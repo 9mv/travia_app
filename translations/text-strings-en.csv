@@ -1,0 +1,273 @@
+textId,text
+config.ai.label,Use AI personalization
+config.ai.helper,Get smart suggestions based on season and destination
+config.luggage.label,Big luggage
+config.luggage.helper,Enable if carrying big suitcase (disabled = backpack only)
+config.season.label,Season
+app.title,Travel List
+app.name,Travel List
+
+# Trip Configuration Screen
+config.screen.title,Trip Planning
+config.screen.subtitle,Travel List Configuration
+config.days.label,Days
+config.days.placeholder,Number of travel days
+config.home.label,Trip home or second residence?
+config.home.helper,Items already available at home will be excluded
+config.ai.label,Use AI personalization
+config.ai.helper,Get smart suggestions based on season and destination
+config.season.label,Season
+config.season.spring,Spring
+config.season.summer,Summer
+config.season.fall,Fall
+config.season.winter,Winter
+config.button.generate,Generate List
+config.error.invalidDays,Please enter a valid number of days
+
+# Packing List Screen
+list.screen.title,Recommended Travel List
+list.button.back,← Back
+list.summary.duration,Duration:
+list.summary.season,Season:
+list.summary.destination,Destination:
+list.summary.totalItems,Total Items:
+list.destination.home,Home
+list.destination.general,General
+list.ai.badge,✨ AI
+list.ai.tip,💡 AI Tip:
+list.button.export,📋 Export to Reminders
+list.days.suffix,days
+
+# Export to Reminders
+reminders.permission.title,Permission Required
+reminders.permission.message,Access to the Reminders app is needed to export the list. Grant permission.
+reminders.permission.cancel,Cancel
+reminders.permission.grant,Grant Permission
+reminders.permission.denied,Permission Denied
+reminders.permission.deniedMessage,Cannot export without access to Reminders.
+reminders.success.title,Done!
+reminders.success.message,Your travel list has been exported to the Reminders app with {count} items.
+reminders.error.title,Error
+reminders.error.message,Could not export to Reminders. Please try again.
+reminders.listName,Travel Lists
+reminders.listColor,#FF6B6B
+reminders.tripTitle.home,Pack for Home - {days} days
+reminders.tripTitle.general,Pack for Trip - {days} days
+reminders.tripNotes.generated,Generated:
+reminders.tripNotes.season,Season:
+reminders.tripNotes.aiEnhanced,AI Enhanced:
+reminders.tripNotes.yes,Yes
+reminders.tripNotes.no,No
+reminders.itemTitle.withQuantity,{name} ({quantity}x)
+reminders.itemTitle.single,{name}
+reminders.itemNotes.category,Category:
+reminders.itemNotes.aiTip,AI Tip:
+
+# AI Enhancement
+ai.error.title,AI Enhancement Failed
+ai.error.message,The basic item list has been generated but AI suggestions could not be added. Please check your API configuration.
+ai.error.apiKey,OpenRouter API key not configured. Please set OPENROUTER_API_KEY in your .env file.
+ai.summary.title,Tips for Your Trip
+ai.suggestedItems.title,AI Suggested Items
+ai.suggestedItems.subtitle,Review these suggested items and decide if you want to add them to your list
+ai.suggestion.accept,✓ Add
+ai.suggestion.decline,✕ Decline
+
+# Item Categories
+category.basics,Basics
+category.clothes,Clothes
+category.toiletries,Toiletries
+category.electronics,Tech
+category.documents,Documents
+category.accessories,Accessories
+category.health,Health
+category.misc,Misc
+category.pending,Pending
+
+# Loading States
+loading.generating,Generating...
+loading.enhancing,Adding AI suggestions...
+loading.exporting,Exporting to Reminders...
+
+# General
+general.ok,OK
+general.cancel,Cancel
+general.error,Error
+general.success,Success
+general.loading,Loading...
+
+# Settings Screen
+settings.title,Settings
+settings.ai.section.title,Artificial Intelligence Configuration
+settings.ai.section.description,Configure your OpenRouter API key to enable smart features like personalized suggestions and travel tips.
+settings.apiKey.label,OpenRouter API Key
+settings.apiKey.placeholder,sk-or-v1-...
+settings.apiKey.show,Show API Key
+settings.apiKey.configured,API Key configured correctly
+settings.apiKey.empty,Please enter an API key.
+settings.apiKey.invalid,Invalid API key. Must start with 'sk-or-v1-'
+settings.apiKey.saved,API Key saved successfully.
+settings.apiKey.saveError,Could not save API key. Please try again.
+settings.apiKey.save,💾 Save API Key
+settings.apiKey.delete,🗑️ Delete API Key
+settings.apiKey.deleted,API Key deleted successfully.
+settings.apiKey.delete.title,Confirm Deletion
+settings.apiKey.delete.message,Are you sure you want to delete the API key? AI features will no longer be available.
+settings.apiKey.delete.confirm,Delete
+settings.apiKey.info.title,How to Get an API Key
+settings.apiKey.info.text,You need an OpenRouter API key to use AI features. It's free to start.
+settings.apiKey.info.get,Visit OpenRouter to create your account and get an API key:
+settings.security.title,Security
+settings.security.info,Your API key is securely stored on the device with encryption. It is never shared or sent anywhere except to OpenRouter.
+
+# Language Settings
+settings.language.section.title,Language
+settings.language.label,App Language
+settings.language.ca,Català
+settings.language.en,English
+settings.language.es,Español
+settings.language.changed,Language changed successfully. The app will reload.
+
+# Custom Items Management
+settings.items.title,Custom Items
+settings.items.description,Manage your packing list items. Add, edit, or remove items, and export/import your configuration.
+settings.items.exportJson,📤 Export JSON
+settings.items.exportCsv,📤 Export CSV
+settings.items.restore,↺ Restore
+settings.items.add,+ Add New Item
+settings.items.restore.title,Restore Defaults
+settings.items.restore.message,This will restore all items to their default configuration. Are you sure?
+settings.items.restore.success,Items restored to defaults
+settings.items.restore.error,Failed to restore defaults
+settings.items.delete.title,Delete Item
+settings.items.delete.message,Are you sure you want to delete "{name}"?
+settings.items.delete.success,Item deleted
+settings.items.delete.error,Failed to delete item
+settings.items.save.success.add,Item added
+settings.items.save.success.edit,Item updated
+settings.items.load.error,Failed to load custom items
+settings.items.export.error,Failed to export configuration
+
+# Item Editor Modal
+itemEditor.title.add,Add New Item
+itemEditor.title.edit,Edit Item
+itemEditor.cancel,Cancel
+itemEditor.save,Save
+itemEditor.saving,Saving...
+itemEditor.id.label,ID
+itemEditor.id.placeholder,unique_item_id
+itemEditor.id.helper,Unique identifier (lowercase, use underscores)
+itemEditor.name.label,Name
+itemEditor.name.placeholder,Item name
+itemEditor.category.label,Category
+itemEditor.category.select,Select Category
+itemEditor.quantityType.label,Quantity Type
+itemEditor.quantityType.fixed,Fixed
+itemEditor.quantityType.perDay,Per Day
+itemEditor.quantity.label,Quantity
+itemEditor.quantity.placeholder,1
+itemEditor.dailyFactor.label,Daily Factor
+itemEditor.dailyFactor.placeholder,1.0
+itemEditor.dailyFactor.helper,e.g., 1.25 = 1.25 items per day of travel
+itemEditor.minDays.label,Minimum Days
+itemEditor.minDays.placeholder,0
+itemEditor.minDays.helper,Only include if trip is at least this many days (0 = always include)
+itemEditor.bigLuggage.label,Requires Big Luggage
+itemEditor.bigLuggage.helper,Only include when user has big luggage
+itemEditor.seasons.label,Seasons (optional)
+itemEditor.seasons.helper,Leave empty to include in all seasons
+itemEditor.includeFor.label,Include For
+itemEditor.includeFor.general,General Trips
+itemEditor.includeFor.home,Going Home
+itemEditor.validation.nameRequired,Item name is required
+itemEditor.validation.idRequired,Item ID is required
+itemEditor.validation.quantityInvalid,Quantity must be at least 1
+itemEditor.validation.dailyFactorInvalid,Daily factor must be greater than 0
+itemEditor.validation.minDaysInvalid,Min days must be 0 or greater
+itemEditor.validation.destinationRequired,Item must be included for at least one destination type
+itemEditor.validation.errorTitle,Validation Error
+itemEditor.error.title,Error
+
+# Item Names
+item.underwear,Underwear
+item.socks,Socks
+item.tshirt,T-shirts
+item.shorts,Shorts
+item.pants,Pants/Jeans
+item.sweater,Sweater
+item.jacket,Jacket
+item.swimsuit,Swimsuit
+item.pajamas,Pajamas
+item.toothbrush,Toothbrush
+item.dni,ID Card
+item.wallet,Wallet
+item.iphone_wallet,iPhone Wallet
+item.keys,Keys
+item.car_keys,Car Keys
+item.menorca_keys,Menorca Keys
+item.phone,Phone
+item.airpods,AirPods
+item.apple_watch,Apple Watch
+item.bose_headphones,Bose Headphones
+item.macbook,MacBook
+item.ipad,iPad
+item.apple_pencil,Apple Pencil
+item.macbook_accessories,MacBook Accessories
+item.apple_watch_charger,Apple Watch Charger
+item.macbook_charger,MacBook Charger
+item.lightning_charger,Lightning Charger
+item.switch,Switch
+item.usbc_cable,USB-C Cable
+item.work_pc,Work PC
+item.work_pc_charger,Work PC Charger
+item.hdmi_adapter,HDMI Adapter
+item.gillete_shaver,Gillette Shaver
+item.contact_lenses,Contact Lenses
+item.perfume,Perfume
+item.toothbrush_kit,Toothbrush Kit
+item.deodorant,Deodorant
+item.styling_gel,Styling Gel
+item.solar_cream,Sunscreen
+item.bath_gel,Bath Gel
+item.shirt,Shirt
+item.tshirt,T-Shirt
+item.sport_clothes,Sport Clothes
+item.underwear,Underwear
+item.socks,Socks
+item.shoes,Shoes
+item.jacket,Jacket
+item.trousers,Trousers
+item.shorts,Shorts
+item.belt,Belt
+item.hoodie_jumper,Hoodie or Jumper
+item.suit,Suit
+item.swimming_suit,Swimming Suit
+item.slippers,Slippers
+item.gloves,Gloves
+item.cap,Cap
+item.pajama,Pajamas
+item.sports_shoes,Sports Shoes
+item.beanie,Beanie
+item.backpack,Backpack
+item.solar_glasses,Sunglasses
+item.glasses,Glasses
+item.ebook,eBook
+item.board_games,Board Games
+item.towel,Towel
+category.basics,Basics
+category.clothes,Clothes
+category.toiletries,Toiletries
+category.electronics,Electronics
+category.documents,Documents
+category.accessories,Accessories
+category.misc,Miscellaneous
+
+# Chat Assistant
+chat.title,Packing Assistant
+chat.subtitle,Ask me about your list
+chat.welcome,Hi! I'm here to help you optimize your packing list. You can ask me about specific items or request suggestions.
+chat.input.placeholder,Ask me about the list...
+chat.loading,Thinking...
+chat.error.title,Chat Error
+chat.error.message,Could not get a response. Please try again.
+chat.button,💬 Assistant
