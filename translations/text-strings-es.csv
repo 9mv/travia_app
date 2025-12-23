@@ -1,5 +1,6 @@
 textId,text
-app.name,Lista de Viajes
+app.name,Travia
+app.title,Travia
 
 # Trip Configuration Screen
 config.screen.title,Planificación de Viaje

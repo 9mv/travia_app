@@ -1,5 +1,6 @@
 export const translationsEs: Record<string, string> = {
-  "app.name": "Lista de Viajes",
+  "app.name": "Travia",
+  "app.title": "Travia",
   "config.screen.title": "Planificación de Viaje",
   "config.screen.subtitle": "Configuración de Lista de Viaje",
   "config.days.label": "Días",

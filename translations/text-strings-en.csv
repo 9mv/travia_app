@@ -4,8 +4,8 @@ config.ai.helper,Get smart suggestions based on season and destination
 config.luggage.label,Big luggage
 config.luggage.helper,Enable if carrying big suitcase (disabled = backpack only)
 config.season.label,Season
-app.title,Travel List
-app.name,Travel List
+app.title,Travia
+app.name,Travia
 
 # Trip Configuration Screen
 config.screen.title,Trip Planning
