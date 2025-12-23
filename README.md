@@ -1,42 +1,181 @@
-# Travel Packing List App
+# 📱 Travia - Smart Travel Packing List
 
-Mobile app that generates personalized packing lists based on trip duration, season, and destination. Exports to iOS/Android Reminders. Optional AI enhancement via OpenRouter.
+Intelligent packing list app with AI personalization, custom items management, and multi-language support.
 
-## Quick Facts
-- **Platform**: iOS/Android (React Native + Expo)
-- **Server**: None (client-only, runs on device)
-- **Storage**: Local only (AsyncStorage + Secure Storage)
-- **Language**: Catalan UI
-- **AI**: Optional (OpenRouter API)
+## 🚀 Quick Start - iOS Development
 
-## Tech Stack
-- Expo SDK 54.0.0
-- React Native 0.81.5
-- TypeScript 5.3.0
-- 662 packages, 0 vulnerabilities
+### Option 1: Automated Setup (Recommended)
 
-## Key Features
-- Trip duration & season selection
-- Home/away mode (excludes items available at home)
-- AI-powered suggestions (optional, requires API key)
-- Export to iOS/Android Reminders
-- Encrypted API key storage
-- Fully offline-capable (except AI)
-
-## Quick Start
-
-### Development
 ```bash
-npm install
-npm start              # Start dev server
-npm run ios            # iOS simulator
-npm run android        # Android emulator
+# One-time setup
+./scripts/setup-ios.sh
+
+# Build release version (no Metro bundler needed)
+./scripts/build-release-ios.sh
 ```
 
-### Production Build
+### Option 2: Manual Setup
+
 ```bash
-npx eas build --platform ios --profile production
+# Install dependencies
+npm install --legacy-peer-deps
+
+# Generate iOS project
+npx expo prebuild --platform ios --clean
+
+# Open in Xcode
+open ios/travia.xcworkspace
+
+# Configure signing and build (see documentation)
 ```
+
+## 📚 Documentation
+
+- **[iOS Build Complete Guide](docs/IOS_BUILD_COMPLETE_GUIDE.md)** - Everything about iOS building
+- **[Local Build Guide](docs/LOCAL_BUILD_GUIDE.md)** - Build with free Apple account
+- **[TestFlight Guide](docs/TESTFLIGHT_GUIDE.md)** - Deploy via TestFlight
+- **[Project Structure](docs/PROJECT_STRUCTURE.md)** - Code organization
+- **[Technical Documentation](docs/TECHNICAL.md)** - Architecture details
+
+## 🏗️ Build Types
+
+### Debug Build (Development)
+```bash
+# Terminal 1: Start Metro bundler
+npm start --dev-client
+
+# Terminal 2: Build in Xcode (Debug scheme)
+# Press Cmd+R in Xcode
+```
+- ✅ Hot reload enabled
+- ✅ Fast iteration
+- ❌ Requires Metro bundler
+
+### Release Build (Production)
+```bash
+# Automated script
+./scripts/build-release-ios.sh
+
+# Or in Xcode: Change scheme to Release, then Cmd+R
+```
+- ✅ No Metro bundler needed
+- ✅ Faster performance
+- ✅ Standalone app
+
+## 🔑 Key Features
+
+- 📦 **Custom Items Management** - Add, edit, delete packing items
+- 🌍 **Multi-language** - Catalan, English, Spanish
+- 🤖 **AI Suggestions** - Smart packing recommendations
+- 🎨 **Dark Mode** - Automatic theme switching
+- 💾 **Export/Import** - Backup your custom items
+- 📱 **Native iOS** - Built with React Native + Expo
+
+## 📱 Testing on iPhone
+
+### Requirements:
+- Mac with Xcode installed
+- iPhone connected via USB
+- Free or paid Apple Developer account
+
+### First Time:
+1. Run `./scripts/setup-ios.sh`
+2. Configure signing in Xcode (add your Apple ID)
+3. Select your iPhone in device selector
+4. Press Play ▶️
+
+### Subsequent Builds:
+```bash
+# For development
+npm start --dev-client
+# Then build in Xcode
+
+# For testing final version
+./scripts/build-release-ios.sh
+```
+
+## ⚠️ Important Notes
+
+### Free Apple Developer Account:
+- ✅ FREE (no $99 payment)
+- ❌ App expires after **7 days**
+- ❌ Must rebuild weekly
+
+### Paid Apple Developer Account ($99/year):
+- ✅ Apps never expire (or 90 days with TestFlight)
+- ✅ Up to 100 devices
+- ✅ Professional distribution
+
+## 🛠️ Development
+
+### Project Structure
+```
+travia/
+├── src/
+│   ├── components/       # React components
+│   ├── services/         # Business logic
+│   ├── types/            # TypeScript types
+│   └── utils/            # Utilities
+├── translations/         # i18n source files
+├── scripts/             # Build scripts
+├── docs/                # Documentation
+└── ios/                 # Generated iOS project (not in git)
+```
+
+### Scripts
+```bash
+# Start development server
+npm start
+
+# Start with development client
+npm start --dev-client
+
+# Regenerate translations
+npm run translations
+
+# Setup iOS
+./scripts/setup-ios.sh
+
+# Build release iOS
+./scripts/build-release-ios.sh
+```
+
+## 🌐 Translations
+
+Add translations in `translations/text-strings-{lang}.csv`, then:
+```bash
+npm run translations
+```
+
+Regenerates TypeScript files in `src/services/translations/`.
+
+## 🔧 Troubleshooting
+
+### "No iOS directory found"
+```bash
+npx expo prebuild --platform ios --clean
+```
+
+### "iPhone not detected"
+```bash
+brew install libimobiledevice
+idevice_id -l
+```
+
+### "App won't launch"
+**Debug:** Make sure Metro bundler is running
+**Release:** Rebuild with Release configuration
+
+### "Untrusted Developer"
+Settings → General → VPN & Device Management → Trust
+
+## 📦 Technologies
+
+- **React Native** 0.81.5
+- **Expo** SDK 54.0.0
+- **TypeScript** 5.3.0
+- **AsyncStorage** 2.1.0
+- **OpenAI** API integration
 
 ## Configuration
 
