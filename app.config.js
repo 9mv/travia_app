@@ -3,8 +3,12 @@ export default ({ config }) => {
   return {
     ...config,
     extra: {
+      ...config.extra,
       openRouterApiKey: process.env.OPENROUTER_API_KEY,
       openRouterBaseUrl: process.env.OPENROUTER_BASE_URL,
+      eas: {
+        projectId: "582dc9ef-7161-4f5c-ab4d-1369e78c75f9"
+      }
     },
   };
 };

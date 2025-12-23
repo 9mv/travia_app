@@ -14,7 +14,8 @@
       "bundleIdentifier": "com.aleix.travia",
       "infoPlist": {
         "NSCalendarsUsageDescription": "This app needs access to your calendar to sync packing lists with Reminders.",
-        "NSRemindersUsageDescription": "This app needs access to your reminders to create packing list reminders."
+        "NSRemindersUsageDescription": "This app needs access to your reminders to create packing list reminders.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
