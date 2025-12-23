@@ -7,34 +7,22 @@
       "developmentClient": true,
       "distribution": "internal",
       "ios": {
-        "simulator": false
-      },
-      "env": {
-        "OPENROUTER_API_KEY": ""
+        "simulator": false,
+        "resourceClass": "m-medium"
       }
     },
     "preview": {
       "distribution": "internal",
       "ios": {
-        "simulator": false
-      },
-      "env": {
-        "OPENROUTER_API_KEY": ""
+        "simulator": false,
+        "resourceClass": "m-medium",
+        "buildConfiguration": "Release"
       }
     },
     "production": {
       "distribution": "store",
-      "env": {
-        "OPENROUTER_API_KEY": ""
-      }
-    }
-  },
-  "submit": {
-    "production": {
       "ios": {
-        "appleId": "",
-        "ascAppId": "",
-        "appleTeamId": ""
+        "resourceClass": "m-medium"
       }
     }
   }
