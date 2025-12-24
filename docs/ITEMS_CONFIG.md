@@ -1,37 +1,38 @@
-# Items Configuration Structure
+# Items Configuration
 
 ## Overview
 
-The `items-config.json` file defines all packing items and their quantity calculation rules. Each item can have either a **fixed quantity** (e.g., 1 passport) or a **per-day quantity** (e.g., 1.25 underwear per day).
+Configure packing items in two ways:
+1. **Code**: Edit `items-config.json` (permanent, requires rebuild)
+2. **In-App**: Settings → Manage Custom Items (stored locally, no rebuild needed)
 
-## Item Structure
+## File Structure (items-config.json)
 
 ### Required Fields
 
-- **`id`** (string): Unique identifier for the item (e.g., "dni", "underwear")
-- **`name`** (string): Display name in English (translations handled separately)
-- **`category`** (ItemCategory): Category for grouping (basics, clothes, toiletries, etc.)
-- **`quantityType`** ('fixed' | 'perDay'): Determines how quantity is calculated
-- **`seasons`** (Season[]): Which seasons this item applies to
-- **`includeFor`** (('general' | 'home')[]): Destination types where item is included
-- **`minDays`** (number): Minimum trip duration to include this item (0 = always include)
+- `id` (string): Unique identifier
+- `name` (string): Display name (English, translations handled separately)
+- `category` (string): One of: basics, documents, clothes, toiletries, electronics, health, accessories, travel, beach
+- `quantityType` ('fixed' | 'perDay'): How to calculate quantity
+- `seasons` (array): Which seasons apply: spring, summer, fall, winter
+- `includeFor` (array): Destination types: general, home
+- `minDays` (number): Minimum trip duration (0 = always include)
 
-### Conditional Fields
+### Quantity Fields
 
-#### For `quantityType: "fixed"`
-- **`quantity`** (number): Explicit quantity (e.g., 1 for passport, 2 for chargers)
+**For fixed items:**
+- `quantity` (number): Static quantity
 
-#### For `quantityType: "perDay"`
-- **`dailyFactor`** (number): Items per day multiplier (e.g., 1.25 = 1.25 underwear per day)
+**For per-day items:**
+- `dailyFactor` (number): Items per day multiplier
 
 ### Optional Fields
-- **`requiresBigLuggage`** (boolean): If true, only include when user has big luggage (default: false)
+
+- `requiresBigLuggage` (boolean): Only include with big luggage
 
 ## Examples
 
-### Fixed Quantity Items
-
-Items that don't depend on trip duration:
+### Fixed Quantity Item
 
 ```json
 {
@@ -46,22 +47,7 @@ Items that don't depend on trip duration:
 }
 ```
 
-```json
-{
-  "id": "phone_charger",
-  "name": "Phone Charger",
-  "category": "electronics",
-  "quantityType": "fixed",
-  "quantity": 1,
-  "seasons": ["spring", "summer", "fall", "winter"],
-  "includeFor": ["general", "home"],
-  "minDays": 0
-}
-```
-
-### Per-Day Items
-
-Items whose quantity depends on trip duration:
+### Per-Day Item
 
 ```json
 {
@@ -75,122 +61,94 @@ Items whose quantity depends on trip duration:
   "minDays": 0
 }
 ```
-*For a 4-day trip: `Math.ceil(1.25 * 4)` = **5 underwear***
+
+**Calculation:** For 4-day trip: `ceil(1.25 × 4) = 5 underwear`
+
+### Season-Specific Item
 
 ```json
 {
-  "id": "shoes",
-  "name": "Shoes",
-  "category": "clothes",
-  "quantityType": "perDay",
-  "dailyFactor": 0.25,
-  "seasons": ["spring", "summer", "fall", "winter"],
-  "includeFor": ["general", "home"],
-  "minDays": 0
-}
-```
-*For a 2-day trip: `Math.max(1, Math.ceil(0.25 * 2))` = **1 pair** (minimum 1 for fractional factors)*
-
-## Quantity Calculation Logic
-
-### Fixed Quantity (`quantityType: "fixed"`)
-```typescript
-quantity = item.quantity || 1
-```
-
-### Per-Day Quantity (`quantityType: "perDay"`)
-```typescript
-const calculated = item.dailyFactor * numberOfDays;
-
-// Special handling for fractional daily factors (0 < dailyFactor < 1)
-// to ensure at least 1 item for short trips
-if (dailyFactor > 0 && dailyFactor < 1) {
-  quantity = Math.max(1, Math.ceil(calculated));
-} else {
-  quantity = Math.ceil(calculated);
-}
-```
-
-## Common Daily Factors
-
-| Factor | Meaning | Example Items |
-|--------|---------|---------------|
-| 1.25   | More than 1 per day | Underwear (extras for laundry) |
-| 1.01   | Approximately 1 per day | Socks (slightly more for buffer) |
-| 0.9    | Almost daily | T-shirts |
-| 0.5    | Every 2 days | Shirts, shorts |
-| 0.33   | Every 3 days | Trousers |
-| 0.25   | Every 4 days | Shoes, swimming suit |
-
-## Filtering Logic
-
-Items are included in the packing list based on:
-
-1. **Trip Duration**: `numberOfDays >= minDays`
-2. **Luggage Type**: If `requiresBigLuggage: true`, only when `hasBigLuggage: true`
-3. **Season**: Current season must be in item's `seasons` array
-4. **Destination**: Destination type must be in item's `includeFor` array
-
-## Migration from Old Format
-
-If you have the old format with `dailyFactor: 0` meaning "fixed quantity":
-
-```bash
-node migrate-quantity-type.js
-```
-
-This converts:
-- `dailyFactor: 0` + `quantity: X` → `quantityType: "fixed"` + `quantity: X`
-- `dailyFactor: Y` (Y > 0) → `quantityType: "perDay"` + `dailyFactor: Y`
-
-## Statistics (Current Configuration)
-
-- **Total Items**: 57
-- **Fixed Quantity Items**: 47 (e.g., passport, phone, chargers, keys)
-- **Per-Day Items**: 10 (e.g., underwear, socks, t-shirts, shoes)
-
-## Maintenance Tips
-
-### Adding a New Fixed Item
-```json
-{
-  "id": "new_item_id",
-  "name": "Item Name",
-  "category": "appropriate_category",
+  "id": "sunscreen",
+  "name": "Sunscreen",
+  "category": "toiletries",
   "quantityType": "fixed",
   "quantity": 1,
-  "seasons": ["spring", "summer", "fall", "winter"],
+  "seasons": ["summer"],
   "includeFor": ["general"],
   "minDays": 0
 }
 ```
 
-### Adding a New Per-Day Item
-```json
-{
-  "id": "new_clothing_item",
-  "name": "Clothing Item",
-  "category": "clothes",
-  "quantityType": "perDay",
-  "dailyFactor": 0.5,
-  "seasons": ["summer"],
-  "includeFor": ["general", "home"],
-  "minDays": 2
-}
-```
+### Big Luggage Only
 
-### Making an Item Require Big Luggage
-Add `"requiresBigLuggage": true` to any item:
 ```json
 {
   "id": "suit",
-  "requiresBigLuggage": true,
-  ...
+  "name": "Suit",
+  "category": "clothes",
+  "quantityType": "fixed",
+  "quantity": 1,
+  "seasons": ["spring", "summer", "fall", "winter"],
+  "includeFor": ["general"],
+  "minDays": 3,
+  "requiresBigLuggage": true
 }
 ```
 
-## See Also
+## Quantity Calculation
 
-- `src/types/index.ts` - TypeScript type definitions
-- `src/services/PackingListService.ts` - Quantity calculation logic
-- `regenerate-translations.js` - Localization for item names
+### Fixed
+```typescript
+quantity = item.quantity || 1
+```
+
+### Per-Day
+```typescript
+quantity = ceil(dailyFactor × numberOfDays)
+
+// Special case: If dailyFactor < 1, minimum is 1
+// Example: 0.25 × 2 days = 0.5 → rounds to 1
+```
+
+## Common Daily Factors
+
+| Factor | Meaning | Example |
+|--------|---------|---------|
+| 1.25 | 1+ per day | Underwear (extras) |
+| 1.01 | ~1 per day | Socks |
+| 0.5 | Every 2 days | Shirts |
+| 0.33 | Every 3 days | Trousers |
+| 0.25 | Every 4 days | Shoes |
+
+## In-App Custom Items
+
+### Add Item
+1. Settings → Manage Custom Items
+2. Tap "Add New Item"
+3. Fill fields (same as JSON structure)
+4. Save
+
+### Import/Export
+- Export: Backup custom items to JSON file
+- Import: Restore from backup
+- Format: Same as `items-config.json`
+
+**Storage:** AsyncStorage (local device only, no cloud sync)
+
+**Merging:** Custom items merge with `items-config.json` at runtime (custom items take priority if same ID)
+
+## Filtering Logic
+
+Items appear in list when ALL conditions match:
+1. `numberOfDays >= minDays`
+2. `currentSeason` in `seasons`
+3. `destinationType` in `includeFor`
+4. If `requiresBigLuggage: true`, then `hasBigLuggage: true`
+
+## Current Database
+
+**Total items:** 57  
+**Fixed:** 47 (passport, phone, chargers, keys, etc.)  
+**Per-day:** 10 (underwear, socks, t-shirts, shoes, etc.)  
+**Categories:** 9 (basics, documents, clothes, toiletries, electronics, health, accessories, travel, beach)
+

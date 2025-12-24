@@ -1,215 +1,286 @@
-# Deployment Guide
+# App Store Deployment
 
-## Overview
-Build standalone iOS/Android apps without App Store distribution using EAS Build.
+## iOS - App Store
 
-## Prerequisites
-- Expo account (free)
-- Apple ID (for iOS)
-- Device for testing
+### Prerequisites
 
-## Setup (One-time)
+- **Apple Developer Program**: $99/year (required for App Store)
+- **Paid developer account** at [developer.apple.com](https://developer.apple.com)
+- Mac with Xcode installed
+- App configured in App Store Connect
 
-### 1. Install EAS CLI
+### Step 1: Prepare App
+
 ```bash
-npm install -g eas-cli
-eas login
+# Update version in app.json
+"version": "1.0.0",
+"ios": {
+  "buildNumber": "1"
+}
+
+# Regenerate iOS project
+npx expo prebuild --platform ios --clean
 ```
 
-### 2. Configure Project
-Already configured in `eas.json` with 3 profiles:
-- **development**: Debug builds for testing
-- **preview**: Pre-production testing
-- **production**: Final release builds
+### Step 2: Configure in Xcode
 
-## Build iOS (Personal Use)
+1. Open `ios/travia.xcworkspace`
+2. Select project → General tab
+3. Set **Version** (e.g., 1.0.0) and **Build** (e.g., 1)
+4. Go to Signing & Capabilities
+5. Enable "Automatically manage signing"
+6. Select your team (paid Apple Developer account)
 
-### Create Build
+### Step 3: Build Archive
+
+1. In Xcode: Product → Destination → **Any iOS Device (arm64)**
+2. Product → Archive
+3. Wait for build to complete (~5-10 min)
+4. Organizer window opens automatically
+
+### Step 4: Upload to App Store Connect
+
+1. In Organizer, select the archive
+2. Click **Distribute App**
+3. Select **App Store Connect**
+4. Click **Upload**
+5. Wait for processing (~15-30 min)
+
+### Step 5: Submit for Review
+
+1. Go to [App Store Connect](https://appstoreconnect.apple.com)
+2. Select your app
+3. Create new version (if needed)
+4. Fill required information:
+   - Screenshots (iPhone, iPad if supported)
+   - Description
+   - Keywords
+   - Privacy policy URL (if collecting data)
+   - Age rating
+5. Click **Submit for Review**
+
+**Review time:** 1-3 days typically
+
+### Updating Your App
+
 ```bash
-npx eas build --platform ios --profile production
+# Increment version or build number in app.json
+"version": "1.0.1",  # or increment buildNumber
+"ios": {
+  "buildNumber": "2"
+}
+
+# Rebuild and repeat steps above
+npx expo prebuild --platform ios --clean
 ```
 
-Build takes 10-20 minutes. Downloads `.ipa` file when complete.
+## iOS - TestFlight (Beta Testing)
 
-### Install on iPhone
+TestFlight allows testing with up to 100 external users before App Store release.
 
-**Option A: Apple Configurator (Mac)**
-1. Install Apple Configurator 2 from App Store
-2. Connect iPhone via USB
-3. Drag .ipa file onto device in Configurator
-4. App installs
+### Setup
 
-**Option B: TestFlight (Easier)**
-1. `npx eas build --platform ios --profile preview`
-2. Submit to TestFlight: `eas submit --platform ios`
-3. Install via TestFlight app on iPhone
+1. Upload build to App Store Connect (same as above, Steps 1-4)
+2. In App Store Connect → TestFlight tab
+3. Add External Testers
+4. Fill "What to Test" notes
+5. Submit for Beta Review (~24 hours)
 
-### Certificate Management
-EAS handles certificates automatically. On first build:
-- Creates development/distribution certificates
-- Stores in your Expo account
-- Reuses for future builds
+**Beta builds expire after 90 days.**
 
-## Build Android
+### Share with Testers
 
-### Create APK
+1. Add tester emails in TestFlight section
+2. Testers receive email invitation
+3. They install TestFlight app
+4. Open invitation link → Install beta
+
+## Android - Google Play
+
+### Prerequisites
+
+- **Google Play Console account**: $25 one-time fee
+- Account at [play.google.com/console](https://play.google.com/console)
+
+### Step 1: Generate Signing Key
+
 ```bash
-npx eas build --platform android --profile production
+# Generate upload keystore
+keytool -genkey -v -keystore upload-keystore.jks \
+  -keyalg RSA -keysize 2048 -validity 10000 \
+  -alias upload
+
+# Keep this file secure! Store password safely
 ```
 
-### Install
-1. Download .apk file
-2. Transfer to Android device
-3. Enable "Install from Unknown Sources" in Settings
-4. Tap .apk to install
+### Step 2: Configure Gradle
 
-## Build Profiles
+Edit `android/app/build.gradle`:
 
-### Development
-```bash
-npx eas build --platform ios --profile development
-```
-- Debug mode
-- Fast builds
-- For testing only
-
-### Preview
-```bash
-npx eas build --platform ios --profile preview
-```
-- Production-like
-- TestFlight compatible
-- Pre-release testing
-
-### Production
-```bash
-npx eas build --platform ios --profile production
-```
-- Optimized
-- Final release
-- Smallest size
-
-## Update App
-
-### Code Changes
-1. Make changes
-2. Test locally: `npm start`
-3. Rebuild: `npx eas build --platform ios`
-4. Install new .ipa
-
-### Over-the-Air (OTA) Updates
-For JavaScript changes only (not native code):
-```bash
-eas update --branch production
-```
-App updates automatically next launch.
-
-## Build Configuration
-
-Located in `eas.json`:
-```json
-{
-  "build": {
-    "production": {
-      "distribution": "internal",
-      "ios": {
-        "resourceClass": "default"
-      }
+```gradle
+android {
+    signingConfigs {
+        release {
+            storeFile file("upload-keystore.jks")
+            storePassword "YOUR_PASSWORD"
+            keyAlias "upload"
+            keyPassword "YOUR_PASSWORD"
+        }
     }
-  }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            ...
+        }
+    }
 }
 ```
 
-## Troubleshooting
+### Step 3: Build Release APK/AAB
 
-### Build Fails
-Check build logs in EAS dashboard:
 ```bash
-eas build:list
+cd android
+
+# For Play Store (AAB - recommended)
+./gradlew bundleRelease
+
+# Output: android/app/build/outputs/bundle/release/app-release.aab
+
+# Or for direct distribution (APK)
+./gradlew assembleRelease
+
+# Output: android/app/build/outputs/apk/release/app-release.apk
 ```
 
-### Certificate Issues
+### Step 4: Create App in Play Console
+
+1. Go to [Google Play Console](https://play.google.com/console)
+2. Click **Create App**
+3. Fill app details:
+   - Name
+   - Default language
+   - App type (Game/App)
+   - Free/Paid
+
+### Step 5: Upload Release
+
+1. In Play Console → Production → Create new release
+2. Upload `app-release.aab`
+3. Fill release notes
+4. Click **Review Release**
+
+### Step 6: Complete Store Listing
+
+Required before first submission:
+
+1. **App Content**
+   - Privacy policy
+   - Target audience
+   - Content rating questionnaire
+   
+2. **Store Listing**
+   - Short description (80 chars)
+   - Full description (4000 chars)
+   - Screenshots (2-8 required)
+   - App icon
+   - Feature graphic
+   
+3. **Pricing & Distribution**
+   - Free/Paid
+   - Countries
+   - Content rating
+
+4. Click **Submit for Review**
+
+**Review time:** Hours to a few days
+
+### Updating Your App
+
 ```bash
-eas credentials              # Manage certificates
-eas build:configure          # Reconfigure
+# Increment versionCode and versionName in android/app/build.gradle
+versionCode 2
+versionName "1.0.1"
+
+# Rebuild
+cd android
+./gradlew bundleRelease
+
+# Upload new release in Play Console
 ```
 
-### Can't Install on iPhone
-- Check device is registered (automatic with internal distribution)
-- Verify Apple ID signed in on device
-- Check device iOS version compatibility
+## Alternative: EAS Build (Simplified)
 
-### Build Takes Forever
-Normal. iOS builds: 10-20 min, Android: 5-10 min.
+Expo's cloud build service handles certificates and signing automatically.
 
-## Cost
-- **EAS Build**: Free tier (30 builds/month)
-- **Beyond free tier**: $29/month
-- **No App Store fees** (not using App Store)
-
-## Distribution
-
-### Personal Use (You Only)
-- Build with `--profile production`
-- Install via Apple Configurator
-- Expires yearly (iOS only)
-
-### Team/Family (Up to 100 devices)
-- Use TestFlight (free)
-- Share via email/link
-- 90-day expiry, renewable
-
-### Public (Everyone)
-- Requires App Store submission ($99/year Apple Developer)
-- Not needed for personal use
-
-## Build Commands Reference
+### Setup
 
 ```bash
-# View all builds
-eas build:list
+# Install EAS CLI
+npm install -g eas-cli
 
-# Cancel build
-eas build:cancel
+# Login
+eas login
 
-# View credentials
-eas credentials
-
-# Configure project
+# Configure
 eas build:configure
+```
 
-# Submit to App Store (optional)
+### Build for App Store
+
+```bash
+# iOS
+eas build --platform ios --profile production
+
+# Android
+eas build --platform android --profile production
+```
+
+EAS handles:
+- Certificate generation
+- Provisioning profiles
+- Signing
+- Build in cloud
+
+**Cost:** Free tier (30 builds/month) or paid plans
+
+### Submit via EAS
+
+```bash
+# Submit to App Store
 eas submit --platform ios
 
-# Update OTA
-eas update --branch production
+# Submit to Play Store
+eas submit --platform android
 ```
 
-## Tips
+## Comparison
 
-### Faster Builds
-- Use `--profile preview` for testing (faster than production)
-- Build Android first (faster) to test quickly
+| Method | Pros | Cons |
+|--------|------|------|
+| **Local Build** | Free, full control | Complex setup, manual certificates |
+| **EAS Build** | Automated, easy | Requires EAS account, build limits |
 
-### Version Management
-Update in `app.json`:
-```json
-{
-  "expo": {
-    "version": "1.0.1"
-  }
-}
+## Cost Summary
+
+| Service | Cost | Notes |
+|---------|------|-------|
+| Apple Developer | $99/year | Required for App Store |
+| Google Play | $25 once | One-time registration |
+| EAS Build | Free/Paid | 30 builds/month free |
+| TestFlight | Free | Included with Apple Developer |
+
+## Security
+
+**Never commit:**
+- `upload-keystore.jks` (Android)
+- Keystore passwords
+- Provisioning profiles
+- Certificates
+
+Add to `.gitignore`:
 ```
-
-### Environment Variables
-Set in EAS:
-```bash
-eas secret:create --name OPENROUTER_API_KEY --value sk-or-v1-...
+*.jks
+*.keystore
+*.p12
+*.mobileprovision
 ```
-Or use in-app Settings (recommended).
-
-## Next Steps
-After first successful build:
-- Test thoroughly on device
-- Set up OTA updates for quick fixes
-- Configure automatic builds on git push (optional)
