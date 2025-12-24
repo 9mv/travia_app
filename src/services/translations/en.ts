@@ -55,7 +55,7 @@ export const translationsEn: Record<string, string> = {
   "reminders.itemNotes.aiTip": "AI Tip:",
   "ai.error.title": "AI Enhancement Failed",
   "ai.error.message": "The basic item list has been generated but AI suggestions could not be added. Please check your API configuration.",
-  "ai.error.apiKey": "OpenRouter API key not configured. Please set OPENROUTER_API_KEY in your .env file.",
+  "ai.error.apiKey": "OpenRouter API key not configured. Please configure it in the Settings screen.",
   "ai.summary.title": "Tips for Your Trip",
   "ai.suggestedItems.title": "AI Suggested Items",
   "ai.suggestedItems.subtitle": "Review these suggested items and decide if you want to add them to your list",

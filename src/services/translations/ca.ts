@@ -55,7 +55,7 @@ export const translationsCa: Record<string, string> = {
   "reminders.itemNotes.aiTip": "Consell de IA:",
   "ai.error.title": "Millora amb IA fallida",
   "ai.error.message": "La llista bàsica d'articles ha estat generada però no s'han pogut afegir suggeriments d'IA. Per favor",
-  "ai.error.apiKey": "Clau API d'OpenRouter no configurada. Per favor",
+  "ai.error.apiKey": "Clau API d'OpenRouter no configurada. Si us plau, configura-la a la pantalla de Configuració.",
   "ai.summary.title": "Consells per al teu viatge",
   "ai.suggestedItems.title": "Articles suggerits per la IA",
   "ai.suggestedItems.subtitle": "Revisa aquests articles suggerits i decideix si vols afegir-los a la teva llista",

@@ -63,7 +63,7 @@ reminders.itemNotes.aiTip,Consejo de IA:
 # AI Enhancement
 ai.error.title,Mejora de IA Fallida
 ai.error.message,La lista básica de artículos ha sido generada pero no se pudieron agregar sugerencias de IA. Por favor
-ai.error.apiKey,Clave API de OpenRouter no configurada. Por favor
+ai.error.apiKey,Clave API de OpenRouter no configurada. Por favor, configúrala en la pantalla de Configuración.
 ai.summary.title,Consejos para tu Viaje
 ai.suggestedItems.title,Artículos Sugeridos por la IA
 ai.suggestedItems.subtitle,Revisa estos artículos sugeridos y decide si quieres agregarlos a tu lista

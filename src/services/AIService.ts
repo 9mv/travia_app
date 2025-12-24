@@ -9,7 +9,7 @@ export class AIService {
   private static cachedApiKey: string | null = null;
 
   /**
-   * Get API key from secure storage or environment variables
+   * Get API key from secure storage or environment variables (development only)
    */
   private static async getApiKey(): Promise<string> {
     // Check memory cache first
@@ -17,21 +17,21 @@ export class AIService {
       return this.cachedApiKey;
     }
 
-    // Try to get from secure storage
+    // Try to get from secure storage (user-configured in Settings)
     const storedKey = await SecureStorageService.getApiKey();
     if (storedKey) {
       this.cachedApiKey = storedKey;
       return storedKey;
     }
 
-    // Fallback to environment variables
-    const envKey = Constants.expoConfig?.extra?.openRouterApiKey || process.env.OPENROUTER_API_KEY;
+    // Fallback to environment variables (development only)
+    const envKey = Constants.expoConfig?.extra?.openRouterApiKey;
     if (envKey) {
       this.cachedApiKey = envKey;
       return envKey;
     }
 
-    throw new Error('OpenRouter API key not configured. Please configure it in Settings or set OPENROUTER_API_KEY in your .env file.');
+    throw new Error('OpenRouter API key not configured. Please configure it in the Settings screen.');
   }
 
   /**
