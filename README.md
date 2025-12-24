@@ -90,4 +90,20 @@ npm run translations
 ```
 
 ## License
-Private project
+
+**MIT License with Non-Commercial Restriction**
+
+Copyright © 2025 Aleix Martinez Vinent
+
+✅ **Allowed:**
+- Personal and educational use
+- Modify and distribute
+- Private use
+
+🚫 **Not Allowed:**
+- Commercial use without permission
+- Removing attribution
+
+See [LICENSE](LICENSE) for full terms.
+
+For commercial licensing, contact: aleixmateumartinez@gmail.com
